@@ -2,6 +2,13 @@
 
 This module provides some basic tools for working with Windows systems, finding out system resources, and gives you more control over process creation.  In this introduction any plain reference is in the `winapi` table, so that `find_window` means `winapi.find_window`.  Normally `winapi` works with the current Windows code page, but can be told to use UTF-8 with @{set_encoding}; interally string operations are in Unicode.
 
+## How to compile
+
+- Download [lua library](https://luabinaries.sourceforge.net/download.html) (lua-5.4.2_Win64_dllw6_lib.zip)
+- Extract into: C:\Program Files (x86)\Lua\Lua Library
+
+Alternative: Change in  build-msvc.bat the path to your lua installation and version
+
 ## Creating and working with Processes
 
 An  irritating fact is that Lua GUI applications (such as IUP or wxLua) cannot use @{os.execute} without the infamous 'flashing black box' of console creation. And @{io.popen} may in fact not work at all.
