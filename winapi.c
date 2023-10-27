@@ -2614,6 +2614,51 @@ static int l_create_reg_key(lua_State *L) {
   }
 }
 
+//  Sends mouse input
+static int l_send_mouse_input(lua_State *L) {
+  if (lua_isnumber(L,1) && lua_isnumber(L,2) && lua_isnumber(L,3)) {
+    LONG dx = (LONG)lua_tonumber(L,1);
+    LONG dy = (LONG)lua_tonumber(L,2);
+    DWORD flags = (DWORD)lua_tonumber(L,3);
+    //        
+    INPUT inp;
+    memset(&inp, 0, sizeof(INPUT));
+    inp.type = INPUT_MOUSE;
+    inp.mi.dx = dx;
+    inp.mi.dy = dy;
+    inp.mi.dwFlags = flags;
+    SendInput(1, &inp, sizeof(INPUT));
+    return 0;
+  } else {
+    return push_error_msg(L,"bad params to send_mouse_input");
+  }
+  return 0;  
+}
+
+
+// send keyboard input
+static int l_send_keyboard_input(lua_State *L) {
+  if (lua_isnumber(L,1) && lua_isnumber(L,2) && lua_isnumber(L,3)) {
+    WORD vk = (WORD)lua_tonumber(L,1);
+    WORD scan = (WORD)lua_tonumber(L,2);
+    DWORD flags = (DWORD)lua_tonumber(L,3);
+    //        
+    INPUT inp;
+    memset(&inp, 0, sizeof(INPUT));
+    inp.type = INPUT_KEYBOARD;
+    inp.ki.wVk = vk;
+    inp.ki.wScan = scan;
+    inp.ki.dwFlags = flags;    
+    SendInput(1, &inp, sizeof(INPUT));
+    return 0;
+  } else {
+    return push_error_msg(L,"bad params to send_keyboard_input");
+  }
+  return 0;  
+}
+
+
+
 #line 2040 "winapi.l.c"
 static const char *lua_code_block = ""\
   "function winapi.execute(cmd,unicode)\n"\
@@ -2869,6 +2914,8 @@ static const luaL_Reg winapi_funs[] = {
    {"watch_for_file_changes",l_watch_for_file_changes},
    {"open_reg_key",l_open_reg_key},
    {"create_reg_key",l_create_reg_key},
+   {"create_reg_key",l_send_mouse_input},
+   {"create_reg_key",l_send_keyboard_input},
     {NULL,NULL}
 };
 
