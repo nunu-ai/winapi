@@ -6,6 +6,7 @@ This module provides some basic tools for working with Windows systems, finding 
 
 - Download [lua library](https://luabinaries.sourceforge.net/download.html) (lua-5.4.2_Win64_dllw6_lib.zip)
 - Extract into: C:\Program Files (x86)\Lua\Lua Library
+- Open the "Developer Command Prompt" Shell, navigate to your repo and execute: build-msvc.bat
 
 Alternative: Change in  build-msvc.bat the path to your lua installation and version
 
